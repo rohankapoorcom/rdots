@@ -1,4 +1,8 @@
 {
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night-Bright.tmTheme",
+	"ignored_packages":
+	[
+		"Vintage"
+	],
 	"theme": "Soda Dark.sublime-theme"
 }
