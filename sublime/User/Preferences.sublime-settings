@@ -2,7 +2,8 @@
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night-Bright.tmTheme",
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"SFTP"
 	],
 	"theme": "Soda Dark.sublime-theme"
 }
