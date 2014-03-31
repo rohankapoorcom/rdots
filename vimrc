@@ -1,4 +1,4 @@
 set nu
-colorscheme evening
+colorscheme Tomorrow-Night-Bright
 set tabstop=4
 filetype plugin indent on
