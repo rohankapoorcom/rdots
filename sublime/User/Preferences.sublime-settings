@@ -1,6 +1,10 @@
 {
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night-Bright.tmTheme",
+<<<<<<< HEAD
 	"font_size": 10,
+=======
+	"font_size": 9,
+>>>>>>> 65b435b0c05dec48b29f586b988298368e4a2061
 	"ignored_packages":
 	[
 		"Vintage",
