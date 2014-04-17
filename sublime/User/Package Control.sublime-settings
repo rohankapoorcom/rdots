@@ -1,6 +1,7 @@
 {
 	"installed_packages":
 	[
+		"Arduino-like IDE",
 		"Cheat Sheets",
 		"Display Functions (Java)",
 		"GitGutter",
@@ -8,6 +9,7 @@
 		"MIPS Syntax",
 		"Package Control",
 		"Package Syncing",
+		"PHP-Twig",
 		"SFTP",
 		"Theme - Soda",
 		"Theme - Sodarized",
