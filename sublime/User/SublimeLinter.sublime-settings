@@ -1,0 +1,9 @@
+{
+
+  "sublimelinter_executable_map":
+    {
+        "css":"C:/Program Files/nodejs/node.exe",
+        "php":"C:/wamp/bin/php/php5.4.12/php.exe"
+    }
+
+}
