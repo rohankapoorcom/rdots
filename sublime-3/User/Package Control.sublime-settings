@@ -1,0 +1,19 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"Emmet",
+		"GitGutter",
+		"Markdown Preview",
+		"Package Control",
+		"requirementstxt",
+		"SideBarEnhancements",
+		"Theme - Soda",
+		"Theme - Soda SolarizedDark",
+		"Tomorrow Color Schemes"
+	]
+}
