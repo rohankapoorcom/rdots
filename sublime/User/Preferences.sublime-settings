@@ -1,11 +1,15 @@
 {
-	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night-Bright.tmTheme",
+	"color_scheme": "Packages/User/Tomorrow-Night-Bright (Flake8Lint).tmTheme",
 	"font_face": "Source Code Pro Semibold",
-	"font_size": 10,
+	"font_size": 11,
 	"ignored_packages":
 	[
-		"Vintage",
-		"GitGutter"
+		"Vintage"
 	],
-	"theme": "Soda Dark.sublime-theme"
+	"rulers":
+	[
+		80
+	],
+	"theme": "Soda Dark.sublime-theme",
+	"auto_complete_triggers": [{"selector": "source.python", "characters": "."}]
 }

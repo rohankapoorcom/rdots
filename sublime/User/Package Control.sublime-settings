@@ -1,21 +1,29 @@
 {
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
 		"Arduino-like IDE",
 		"Cheat Sheets",
 		"Display Functions (Java)",
 		"GitGutter",
-		"JSHint Gutter",
+		"isort",
+		"Jedi - Python autocompletion",
+		"Jinja2",
 		"MIPS Syntax",
 		"Package Control",
 		"Package Syncing",
 		"PHP-Twig",
+		"Python Imports Sorter",
 		"SFTP",
-		"SublimeCodeIntel",
+		"Simple Print Function",
 		"SublimeLinter",
 		"Theme - Soda",
 		"Theme - Sodarized",
 		"Tomorrow Color Schemes",
-		"Verilog"
+		"Verilog",
+		"Whitespace"
 	]
 }
