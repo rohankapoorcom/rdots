@@ -3,7 +3,7 @@
 	"auto_complete_commit_on_tab": true,
 	"auto_match_enabled": true,
 	"bold_folder_labels": true,
-	"caret_style": "solid",
+	"caret_style": "phase",
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night-Bright.tmTheme",
 	"detect_indentation": true,
 	"draw_indent_guides": true,
@@ -15,7 +15,8 @@
 		"*.git"
 	],
 	"find_selected_text": true,
-	"fold_buttons": false,
+	"fold_buttons": true,
+	"fade_fold_buttons": false,
 	"folder_exclude_patterns":
 	[
 	],
@@ -28,8 +29,8 @@
 		"Vintage"
 	],
 	"indent_to_bracket": true,
-	"line_padding_bottom": 0,
-	"line_padding_top": 0,
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
 	"match_brackets": true,
 	"match_brackets_angle": false,
 	"match_brackets_braces": true,
@@ -47,7 +48,8 @@
 	"save_on_focus_lost": true,
 	"scroll_past_end": false,
 	"show_full_path": true,
-	"show_minimap": false,
+	"show_minimap": true,
+	"always_show_minimap_viewport": true,
 	"tab_size": 2,
 	"theme": "Soda Dark 3.sublime-theme",
 	"translate_tabs_to_spaces": true,
