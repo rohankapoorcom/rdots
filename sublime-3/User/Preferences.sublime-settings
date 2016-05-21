@@ -1,4 +1,5 @@
 {
+	"always_show_minimap_viewport": true,
 	"auto_complete": true,
 	"auto_complete_commit_on_tab": true,
 	"auto_match_enabled": true,
@@ -8,6 +9,7 @@
 	"detect_indentation": true,
 	"draw_indent_guides": true,
 	"ensure_newline_at_eof_on_save": true,
+	"fade_fold_buttons": false,
 	"file_exclude_patterns":
 	[
 		"*.DS_Store",
@@ -16,7 +18,6 @@
 	],
 	"find_selected_text": true,
 	"fold_buttons": true,
-	"fade_fold_buttons": false,
 	"folder_exclude_patterns":
 	[
 	],
@@ -49,7 +50,6 @@
 	"scroll_past_end": false,
 	"show_full_path": true,
 	"show_minimap": true,
-	"always_show_minimap_viewport": true,
 	"tab_size": 2,
 	"theme": "Soda Dark 3.sublime-theme",
 	"translate_tabs_to_spaces": true,
