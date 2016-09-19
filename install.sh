@@ -28,7 +28,7 @@ sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/vimrc $USER_HOME/.vimrc
 echo "Linking vim from $SCRIPT_DIRECTORY to $USER_HOME"
 sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/vim/ $USER_HOME/.vim
 
-if [ "uname -s" == "Darwin" ]
+if [ "$(uname -s)" == "Darwin" ]
 then
     export PATH=$OLD_PATH
 fi
