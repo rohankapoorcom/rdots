@@ -1,0 +1,119 @@
+#!/bin/bash
+# Source: http://colombianjoker.blogspot.com/2011/04/command-in-mac-os-x.html
+
+export PRGNAME=$(basename "$0" .sh)
+
+ShowSyntax ()
+{
+  printf "$PRGNAME lists UNIX file databases\n" 
+  printf "Syntax:\n"
+  printf -- "  $PRGNAME passwd [ USERNAME ...  ]\n"
+  printf -- "  $PRGNAME group  [ GROUPNAME ... ]\n"
+  printf -- "  $PRGNAME hosts  [ HOSTNAME ... ]\n" 
+  printf -- "  -h          -- Shows this help\n"
+}
+
+ListPasswd ()
+{
+  if [ -n "$1" ]
+  then
+    for U in "$@"
+    do
+      dscl . -read /Users/$U | awk '/NFSHomeDirectory/{h=$2}
+      /Password/{p=$2}
+      /PrimaryGroupID/{g=$2}
+      /RealName/{n=$2}
+      /RecordName/{u=$2}
+      /UniqueID/{i=$2}
+      /UserShell/{s=$2}
+      END {print u ":" p ":" i ":" g ":" n ":" h ":" s}'
+    done
+  else
+    for U in $(dscl . -list /Users)
+    do
+      dscl . -read /Users/$U | awk '/NFSHomeDirectory/{h=$2}
+      /Password/{p=$2}
+      /PrimaryGroupID/{g=$2}
+      /RealName/{n=$2}
+      /RecordName/{u=$2}
+      /UniqueID/{i=$2}
+      /UserShell/{s=$2}
+      END {print u ":" p ":" i ":" g ":" n ":" h ":" s}'
+    done    
+  fi
+}
+
+ListGroup ()
+{
+  if [ -n "$1" ]
+  then
+    for G in "$@"
+    do
+      dscl . -read /Groups/$G | awk '/RecordName/{n=$2}
+      /PrimaryGroupID/{i=$2}
+      /Password/{p=$2}
+      /RealName/{n=$2}
+      /GroupMembership/{$1=""; for(j=1; j<=NF; j++){u=u "," $j}; u=substr(u,3)}
+      END {print n ":" p ":" i ":" u}'
+    done
+  else
+    for G in $(dscl . list /Groups)
+    do
+      dscl . -read /Groups/$G | awk '/RecordName/{n=$2}
+      /PrimaryGroupID/{i=$2}
+      /Password/{p=$2}
+      /RealName/{n=$2}
+      /GroupMembership/{$1=""; for(j=1; j<=NF; j++){u=u "," $j}; u=substr(u,3)}
+      END {print n ":" p ":" i ":" u}'
+    done
+  fi
+}
+
+ListHost ()
+{
+  if [ -n "$1" ]
+  then
+    for H in "$@"
+    do
+      grep -iw "$H" /etc/hosts
+    done
+  else
+    egrep -iv "^#|^ *$" /etc/hosts
+  fi
+}
+
+if [ -n "$1" ]
+then
+  while getopts :h OPT "$@"
+  do
+    case "$OPT" in
+    (h) ShowSyntax >&2
+      exit 0
+      ;;
+    esac
+  done
+  shift $(expr $OPTIND - 1)
+  
+  if [ -n "$1" ]
+  then
+    # Process lines
+    case "$1" in
+      (pa*) shift
+        ListPasswd "$@"
+        ;;
+      (gr*) shift
+        ListGroup "$@"
+        ;;
+      (ho*) shift
+        ListHost "$@"
+        ;;
+    esac
+  else
+    printf "$PRGNAME: Too few arguments!\n" >&2
+    exit 2
+  fi
+else
+  printf "$PRGNAME: Too few arguments!\n" >&2
+  exit 2
+fi
+  
