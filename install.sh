@@ -41,6 +41,13 @@ if ! [[ -L $USER_HOME/.vim && -d $USER_HOME/.vim ]]; then
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/vim/ $USER_HOME/.vim
 fi
 
+# Clone Bash It
+if ! [ "$(ls -A $SCRIPT_DIRECTORY/bash_it)" ]; then
+  echo "Downloading latest copy of bash it to $SCRIPT_DIRECTORY/bash_it"
+  sudo -u $USERNAME git submodule init
+  sudo -u $USERNAME git submodule update
+fi
+
 # Install Bash It
 if ! [[ -L $USER_HOME/.bash_it && -d $USER_HOME/.bash_it ]]; then
   echo "Linking bash_it from $SCRIPT_DIRECTORY to $USER_HOME"
