@@ -1,4 +1,4 @@
 rdots
 =====
 
-My dot files and configuration. Currently includes vim, emacs, and sublime text 2.
+My dot files and configuration. Currently includes vim, bash-it, fonts, tmux and sublime text 3.
