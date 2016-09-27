@@ -52,6 +52,10 @@ fi
 if ! [[ -L $USER_HOME/.bash_it && -d $USER_HOME/.bash_it ]]; then
   echo "Linking bash_it from $SCRIPT_DIRECTORY to $USER_HOME"
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/bash_it $USER_HOME/.bash_it
+fi
+
+if ! [[ -L $USER_HOME/.bash_it/custom && -d $USER_HOME/.bash_it/custom ]]; then
+  sudo -u $USERNAME rm -rf $USER_HOME/.bash_it/custom
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/bash-it-config $USER_HOME/.bash_it/custom
 fi
 
