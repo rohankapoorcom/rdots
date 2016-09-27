@@ -72,7 +72,7 @@ if [ "$IS_MAC" = true ]; then
 fi
 
 # Ubuntu specific installations (sublime text 3, spotify, Logitech t650 control script)
-if [ "$(lsb_release -si)" == "Ubuntu" ]; then
+if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
   if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
     echo "Installing Sublime Text 3"
     add-apt-repository -y ppa:webupd8team/sublime-text-3
@@ -105,7 +105,7 @@ sudo -u $USERNAME mkdir -p $FONTS_DIR
 if ! [[ -L $FONTS_DIR/custom && -d $FONTS_DIR/custom ]]; then
   echo "Linking fonts/OTF from $SCRIPT_DIRECTORY to $USER_HOME"
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/fonts/OTF $FONTS_DIR/custom
-  if ["$IS_MAC" = false ]; then
+  if [ "$IS_MAC" = false ]; then
     fc-cache -fv
   fi
 fi
