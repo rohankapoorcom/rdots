@@ -45,6 +45,7 @@ fi
 if ! [[ -L $USER_HOME/.bash_it && -d $USER_HOME/.bash_it ]]; then
   echo "Linking bash_it from $SCRIPT_DIRECTORY to $USER_HOME"
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/bash_it $USER_HOME/.bash_it
+  sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/bash-it-config $USER_HOME/.bash_it/custom
 fi
 
 # Add local bashrc to existing .bashrc
@@ -87,7 +88,7 @@ if [ "$(lsb_release -si)" == "Ubuntu" ]; then
   fi
 
   echo "Copying touchsettings.sh from $SCRIPT_DIRECTORY to /etc/profile.d/"
-  cp touchsettings.sh /etc/profile.d/touchsettings.sh
+  cp $SCRIPT_DIRECTORY/touchsettings.sh /etc/profile.d/touchsettings.sh
 
   FONTS_DIR="$USER_HOME/.fonts"
 fi
