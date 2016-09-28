@@ -112,6 +112,9 @@ if ! [[ -L $FONTS_DIR/custom && -d $FONTS_DIR/custom ]]; then
   echo "Linking fonts/OTF from $SCRIPT_DIRECTORY to $USER_HOME"
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/fonts/OTF $FONTS_DIR/custom
   if [ "$IS_MAC" = false ]; then
+    if ! [ "$(dpkg -s fontconfig | grep Status)" == "Status: install ok installed" ]; then
+      apt-get install fontconfig
+    fi
     fc-cache -fv
   fi
 fi
