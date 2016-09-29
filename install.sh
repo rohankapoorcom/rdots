@@ -134,3 +134,6 @@ if ! [[ -L $FONTS_DIR/custom && -d $FONTS_DIR/custom ]]; then
     fc-cache -fv
   fi
 fi
+
+# Git Setup
+git config --global core.editor $(which nvim)
