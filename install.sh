@@ -83,7 +83,7 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
       echo "Installing Sublime Text 3"
       add-apt-repository -y ppa:webupd8team/sublime-text-3
       apt-get update
-      apt-get install sublime-text-installer
+      apt-get install -y sublime-text-installer
 
       echo "Removing Sublime Text 3 default config"
       sudo -u $USERNAME rm -r "$USER_HOME/.config/sublime-text-3/Packages/User"
@@ -97,7 +97,7 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
       apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
       echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
       apt-get update
-      apt-get install spotify-client
+      apt-get install -y spotify-client
     fi
 
     echo "Copying touchsettings.sh from $SCRIPT_DIRECTORY to /etc/profile.d/"
@@ -113,7 +113,7 @@ if ! [[ -L $FONTS_DIR/custom && -d $FONTS_DIR/custom ]]; then
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/fonts/OTF $FONTS_DIR/custom
   if [ "$IS_MAC" = false ]; then
     if ! [ "$(dpkg -s fontconfig | grep Status)" == "Status: install ok installed" ]; then
-      apt-get install fontconfig
+      apt-get install -y fontconfig
     fi
     fc-cache -fv
   fi
