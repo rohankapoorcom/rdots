@@ -77,30 +77,32 @@ fi
 
 # Ubuntu specific installations (sublime text 3, spotify, Logitech t650 control script)
 if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
-  if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
-    echo "Installing Sublime Text 3"
-    add-apt-repository -y ppa:webupd8team/sublime-text-3
-    apt-get update
-    apt-get install sublime-text-installer
+  # Check for graphical environment
+  if ! tty -s; then
+    if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
+      echo "Installing Sublime Text 3"
+      add-apt-repository -y ppa:webupd8team/sublime-text-3
+      apt-get update
+      apt-get install -y sublime-text-installer
 
-    echo "Removing Sublime Text 3 default config"
-    sudo -u $USERNAME rm -r "$USER_HOME/.config/sublime-text-3/Packages/User"
-    sudo -u $USERNAME mkdir -p "$USER_HOME/.config/sublime-text-2/Packages/"
+      echo "Removing Sublime Text 3 default config"
+      sudo -u $USERNAME rm -r "$USER_HOME/.config/sublime-text-3/Packages/User"
+      sudo -u $USERNAME mkdir -p "$USER_HOME/.config/sublime-text-2/Packages/"
 
-    echo "Linking Sublime Text from $SCRIPT_DIRECTORY to $USER_HOME"
-    sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/sublime-3/User "$USER_HOME/.config/sublime-text-3/Packages/User"
+      echo "Linking Sublime Text from $SCRIPT_DIRECTORY to $USER_HOME"
+      sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/sublime-3/User "$USER_HOME/.config/sublime-text-3/Packages/User"
+    fi
+
+    if ! [ "$(dpkg -s spotify-client | grep Status)" == "Status: install ok installed" ]; then
+      apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+      echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
+      apt-get update
+      apt-get install -y spotify-client
+    fi
+
+    echo "Copying touchsettings.sh from $SCRIPT_DIRECTORY to /etc/profile.d/"
+    cp $SCRIPT_DIRECTORY/touchsettings.sh /etc/profile.d/touchsettings.sh
   fi
-
-  if ! [ "$(dpkg -s spotify-client | grep Status)" == "Status: install ok installed" ]; then
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-    echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
-    apt-get update
-    apt-get install spotify-client
-  fi
-
-  echo "Copying touchsettings.sh from $SCRIPT_DIRECTORY to /etc/profile.d/"
-  cp $SCRIPT_DIRECTORY/touchsettings.sh /etc/profile.d/touchsettings.sh
-
   FONTS_DIR="$USER_HOME/.fonts"
 fi
 
@@ -110,6 +112,9 @@ if ! [[ -L $FONTS_DIR/custom && -d $FONTS_DIR/custom ]]; then
   echo "Linking fonts/OTF from $SCRIPT_DIRECTORY to $USER_HOME"
   sudo -u $USERNAME ln -s $SCRIPT_DIRECTORY/fonts/OTF $FONTS_DIR/custom
   if [ "$IS_MAC" = false ]; then
+    if ! [ "$(dpkg -s fontconfig | grep Status)" == "Status: install ok installed" ]; then
+      apt-get install -y fontconfig
+    fi
     fc-cache -fv
   fi
 fi
