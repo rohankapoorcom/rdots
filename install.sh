@@ -26,22 +26,32 @@ if [ "$(uname -s)" == "Darwin" ]; then
 fi
 
 # Get the directory of the user
-USER_HOME="$(getent passwd $USER | cut -d: -f6)"
+USER_HOME="$(getent passwd "$USER" | cut -d: -f6)"
 
 # Link up dot files
 if ! [[ -L $USER_HOME/.tmux.conf ]]; then
   echo "Linking tmux.conf from $SCRIPT_DIRECTORY to $USER_HOME"
-  ln -s $SCRIPT_DIRECTORY/tmux.conf $USER_HOME/.tmux.conf
+  ln -s "$SCRIPT_DIRECTORY"/tmux.conf "$USER_HOME"/.tmux.conf
 fi
 
 if ! [[ -L $USER_HOME/.vimrc ]]; then
   echo "Linking vimrc from $SCRIPT_DIRECTORY to $USER_HOME"
-  ln -s $SCRIPT_DIRECTORY/vimrc $USER_HOME/.vimrc
+  ln -s "$SCRIPT_DIRECTORY"/vimrc "$USER_HOME"/.vimrc
 fi
 
-if ! [[ -L $USER_HOME/.vim/Vundle.vim && -d $USER_HOME/.vim/Vundle.vim ]]; then
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p "$USER_HOME/.config"
+
+if ! [[ -L $USER_HOME/.config/nvim ]]; then
+  ln -s "$USER_HOME"/.vim "$USER_HOME"/.config/nvim
+  ln -s "$SCRIPT_DIRECTORY"/vimrc "$USER_HOME"/.config/nvim/init.vim
 fi
+
+# Clone vundle
+if ! [[ -d $USER_HOME/.vim/bundle/Vundle.vim ]]; then
+  git clone https://github.com/VundleVim/Vundle.vim.git "$USER_HOME"/.vim/bundle/Vundle.vim
+fi
+
+# Install vim plugins
 vim +PluginInstall +qall
 
 # Clone Bash It
@@ -54,12 +64,12 @@ fi
 # Install Bash It
 if ! [[ -L $USER_HOME/.bash_it && -d $USER_HOME/.bash_it ]]; then
   echo "Linking bash_it from $SCRIPT_DIRECTORY to $USER_HOME"
-  ln -s $SCRIPT_DIRECTORY/bash_it $USER_HOME/.bash_it
+  ln -s "$SCRIPT_DIRECTORY"/bash_it $USER_HOME/.bash_it
 fi
 
 if ! [[ -L $USER_HOME/.bash_it/custom && -d $USER_HOME/.bash_it/custom ]]; then
-  rm -rf $USER_HOME/.bash_it/custom
-  ln -s $SCRIPT_DIRECTORY/bash-it-config $USER_HOME/.bash_it/custom
+  rm -rf "$USER_HOME/.bash_it/custom"
+  ln -s "$SCRIPT_DIRECTORY"/bash-it-config "$USER_HOME/.bash_it/custom"
 fi
 
 # Add local bashrc to existing .bashrc
@@ -77,6 +87,7 @@ if [ "$IS_MAC" = true ]; then
   export PATH=$OLD_PATH
   FONTS_DIR="$USER_HOME/Library/Fonts"
 
+  brew update
   brew install neovim/neovim/neovim
 fi
 
@@ -95,7 +106,7 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
       mkdir -p "$USER_HOME/.config/sublime-text-2/Packages/"
 
       echo "Linking Sublime Text from $SCRIPT_DIRECTORY to $USER_HOME"
-      ln -s $SCRIPT_DIRECTORY/sublime-3/User "$USER_HOME/.config/sublime-text-3/Packages/User"
+      ln -s "$SCRIPT_DIRECTORY"/sublime-3/User "$USER_HOME/.config/sublime-text-3/Packages/User"
     fi
 
     if ! [ "$(dpkg -s spotify-client | grep Status)" == "Status: install ok installed" ]; then
@@ -115,7 +126,7 @@ fi
 mkdir -p $FONTS_DIR
 if ! [[ -L $FONTS_DIR/custom && -d $FONTS_DIR/custom ]]; then
   echo "Linking fonts/OTF from $SCRIPT_DIRECTORY to $USER_HOME"
-  ln -s $SCRIPT_DIRECTORY/fonts/OTF $FONTS_DIR/custom
+  ln -s "$SCRIPT_DIRECTORY"/fonts/OTF $FONTS_DIR/custom
   if [ "$IS_MAC" = false ]; then
     if ! [ "$(dpkg -s fontconfig | grep Status)" == "Status: install ok installed" ]; then
       sudo apt-get install -y fontconfig
