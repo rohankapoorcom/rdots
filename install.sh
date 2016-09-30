@@ -42,6 +42,7 @@ fi
 mkdir -p "$USER_HOME/.config"
 
 if ! [[ -L $USER_HOME/.config/nvim ]]; then
+  mkdir -p $USER_HOME/.config
   ln -s "$USER_HOME"/.vim "$USER_HOME"/.config/nvim
   ln -s "$SCRIPT_DIRECTORY"/vimrc "$USER_HOME"/.config/nvim/init.vim
 fi
