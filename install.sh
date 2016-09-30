@@ -97,7 +97,7 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
 
   if ! [ "$(dpkg -s neovim | grep Status)" == "Status: install ok installed" ]; then
     echo "Installing neovim"
-    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo apt-get update
     sudo apt-get install -y neovim
   fi
