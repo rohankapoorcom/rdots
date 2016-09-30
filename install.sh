@@ -97,9 +97,9 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
   if ! tty -s; then
     if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
       echo "Installing Sublime Text 3"
-      add-apt-repository -y ppa:webupd8team/sublime-text-3
-      apt-get update
-      apt-get install -y sublime-text-installer
+      sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+      sudo apt-get update
+      sudo apt-get install -y sublime-text-installer
 
       echo "Removing Sublime Text 3 default config"
       rm -r "$USER_HOME/.config/sublime-text-3/Packages/User"
@@ -110,10 +110,18 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
     fi
 
     if ! [ "$(dpkg -s spotify-client | grep Status)" == "Status: install ok installed" ]; then
+      echo "Install Spotify Linux Client"
       sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
       echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
       sudo apt-get update
       sudo apt-get install -y spotify-client
+    fi
+
+    if ! [ "$(dpkg -s neovim | grep Status)" == "Status: install ok installed" ]; then
+      echo "Installing neovim"
+      sudo add-apt-repository ppa:neovim-ppa/unstable
+      sudo apt-get update
+      sudo apt-get install -y neovim
     fi
 
     echo "Copying touchsettings.sh from $SCRIPT_DIRECTORY to /etc/profile.d/"
