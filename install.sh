@@ -94,6 +94,14 @@ fi
 
 # Ubuntu specific installations (sublime text 3, spotify, Logitech t650 control script)
 if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
+
+  if ! [ "$(dpkg -s neovim | grep Status)" == "Status: install ok installed" ]; then
+    echo "Installing neovim"
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo apt-get update
+    sudo apt-get install -y neovim
+  fi
+
   # Check for graphical environment
   if ! tty -s; then
     if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
@@ -116,13 +124,6 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
       echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
       sudo apt-get update
       sudo apt-get install -y spotify-client
-    fi
-
-    if ! [ "$(dpkg -s neovim | grep Status)" == "Status: install ok installed" ]; then
-      echo "Installing neovim"
-      sudo add-apt-repository ppa:neovim-ppa/unstable
-      sudo apt-get update
-      sudo apt-get install -y neovim
     fi
 
     echo "Copying touchsettings.sh from $SCRIPT_DIRECTORY to /etc/profile.d/"
