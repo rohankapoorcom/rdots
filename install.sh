@@ -147,3 +147,4 @@ fi
 
 # Git Setup
 git config --global core.editor $(which nvim)
+git config --global fetch.prune true
