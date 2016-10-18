@@ -102,6 +102,12 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
     sudo apt-get install -y neovim
   fi
 
+  if ! [ "$(dpkg -s htop | grep Status)" == "Status: install ok installed" ]; then
+    echo "Installing htop"
+    sudo apt-get update
+    sudo apt-get install -y htop
+  fi
+
   # Check for graphical environment
   if tty -s; then
     if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
