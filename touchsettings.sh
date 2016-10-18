@@ -9,7 +9,7 @@ if tty -s; then
   synclient FingerHigh=3
   synclient MaxTapTime=180
   synclient MaxTapMove=162
-  synclient MaxDoubleTapTime=100
+  synclient MaxDoubleTapTime=250
   synclient SingleTapTimeout=180
   synclient ClickTime=100
   synclient EmulateMidButtonTime=0
