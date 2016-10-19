@@ -42,7 +42,7 @@ export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"; history -a; history -c; history -r; powerline_prompt_command;_pyenv_virtualenv_hook';
 
 alias vim='nvim'
 alias vi='nvim'
