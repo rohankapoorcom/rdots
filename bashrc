@@ -47,3 +47,5 @@ PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"; history -a; history -c; history -r
 alias vim='nvim'
 alias vi='nvim'
 alias editor='nvim'
+
+if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
