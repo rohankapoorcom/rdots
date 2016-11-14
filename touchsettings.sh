@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if tty -s; then
+if [[ -n "$DISPLAY" ]] && [[ -z "$SSH_CLIENT" ]] && [[ -z "$SSH_TTY" ]]; then
   synclient LeftEdge=113
   synclient RightEdge=2719
   synclient TopEdge=127
