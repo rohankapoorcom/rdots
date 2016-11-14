@@ -108,6 +108,20 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
     sudo apt-get install -y htop
   fi
 
+  if ! [ "$(which tmux)" ]; then
+    echo "Installing tmux build dependencies"
+    sudo apt-get install -y exuberant-ctags cmake libevent-dev libncurses5-dev
+    OLD_PWD=$PWD
+    cd /tmp
+    echo "Compiling tmux from source"
+    wget https://github.com/tmux/tmux/releases/download/2.3/tmux-2.3.tar.gz
+    tar -xzf tmux-2.3.tar.gz
+    cd tmux-2.3
+    ./configure && make
+    sudo make install
+    cd $OLD_PWD
+  fi
+
   # Check for graphical environment
   if tty -s; then
     if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
