@@ -73,6 +73,13 @@ if ! [[ -L $USER_HOME/.bash_it/custom && -d $USER_HOME/.bash_it/custom ]]; then
   ln -s "$SCRIPT_DIRECTORY"/bash-it-config "$USER_HOME/.bash_it/custom"
 fi
 
+# Clone Tmuxifier
+if ! [ "$(ls -A $SCRIPT_DIRECTORY/tmuxifier)" ]; then
+  echo "Downloading latest copy of tmuxifier to $SCRIPT_DIRECTORY/tmuxifier"
+  git submodule init
+  git submodule update
+fi
+
 # Add local bashrc to existing .bashrc
 if ! grep -q "$SCRIPT_DIRECTORY/bashrc" "$USER_HOME/.bashrc"; then
   echo "Setting $SCRIPT_DIRECTORY/bashrc to be sourced by $USER_HOME/.bashrc"

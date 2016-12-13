@@ -1,3 +1,8 @@
+SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Adding tmuxifier to path
+export PATH="$SCRIPT_DIRECTORY/tmuxifier/bin:$PATH"
+
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
 
@@ -34,6 +39,9 @@ export SCM_CHECK=true
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+# Enable tmuxifier
+eval "$(tmuxifier init -)"
 
 # Bash history settings
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
