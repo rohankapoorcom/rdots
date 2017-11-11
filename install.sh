@@ -130,7 +130,7 @@ if [[ "$IS_MAC" = false && "$(lsb_release -si)" == "Ubuntu" ]]; then
   fi
 
   # Check for graphical environment
-  if tty -s; then
+  if xhost >& /dev/null; then
     if ! [ "$(dpkg -s sublime-text-installer | grep Status)" == "Status: install ok installed" ]; then
       echo "Installing Sublime Text 3"
       sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
