@@ -43,6 +43,11 @@ source $BASH_IT/bash_it.sh
 # Enable tmuxifier
 eval "$(tmuxifier init -)"
 
+# Load pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # Bash history settings
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
@@ -50,7 +55,7 @@ export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
-PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"; history -a; history -c; history -r; powerline_prompt_command;_pyenv_virtualenv_hook';
+PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"; history -a; history -c; history -r; powerline_prompt_command';
 
 alias vim='nvim'
 alias vi='nvim'
